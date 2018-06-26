@@ -3,12 +3,13 @@
 #include <stdint.h>
 #include <math.h>
 
+double smooth();
+
 uint32_t minstd(uint32_t seed) {
   return ((uint64_t)seed * 48271) % 214783647;
 }
 
-int main(int argc, char *argv[]) {
-  printf("This. Is. SPARTA!\n");
+double smooth() {
   int ndat = 50000;
   
   double *buf = (double *) malloc(ndat*sizeof(double));
@@ -30,11 +31,14 @@ int main(int argc, char *argv[]) {
       sbuf[i] += buf[j]*exp(-dist*dist);
     }
   }
-  
-  for (int i=0; i<100; ++i) {
-    printf("%d  %.15lf  %.15lf\n", i, buf[i], sbuf[i]);
+
+  double sum = 0;
+  for (int i=0; i<ndat; ++i) {
+    sum += sbuf[i];
   }
-  
+
   free(buf);
   free(sbuf);
+
+  return sum;
 }

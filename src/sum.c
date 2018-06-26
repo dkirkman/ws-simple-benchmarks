@@ -1,6 +1,5 @@
-#include <stdio.h>
 
-int main(int argc, char *argv[]) {
+double sum() {
   int ndat = 1000*1000*1000;
   double sum = 0.0;
   
@@ -8,5 +7,5 @@ int main(int argc, char *argv[]) {
     sum += 0.01;
   }
 
-  printf ("sum = %f\n", sum);
+  return sum;
 }
