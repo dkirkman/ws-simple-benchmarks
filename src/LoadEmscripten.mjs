@@ -40,6 +40,7 @@ let module_options = function(options) {
       if (options.instantiateWasm) {
         emccOpts.instantiateWasm = options.instantiateWasm;
       }
+
       return emccOpts;       
     }));
   });
@@ -52,7 +53,7 @@ export default function (options, cb) {
 
     module_options(options).then(mopts => {
       import(/* webpackChunkName: "libTestAsm" */ 
-        './libdkbench.js').then(module => {
+        './libdkbenchAsm.js').then(module => {
           module.default(mopts).then(cspace => cb(cspace));
         });
 

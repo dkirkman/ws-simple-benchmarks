@@ -43,5 +43,6 @@ double smooth() {
   free(buf);
   free(sbuf);
 
+  printf("sum = %lf\n", sum);
   return sum;
 }

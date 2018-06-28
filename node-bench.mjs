@@ -19,8 +19,9 @@ console.log('--------- pure js ------------');
   console.log('smooth = ' + val + '  ' + (end-start) + ' ms');
 }
 
+
+console.log('--------- asm.js ------------');
 loadEmscripten({'asm.js': true}, cspace => {
-  console.log('--------- asm.js ------------');
   {
     let start = performance.now();
     let sum = cspace._sum();
@@ -35,8 +36,8 @@ loadEmscripten({'asm.js': true}, cspace => {
     console.log('smooth = ' + smooth + '  ' + (end-start) + ' ms');
   }
 
+  console.log('--------- webassembly ------------');
   loadEmscripten({'asm.js': false}, waspace => {
-    console.log('--------- asm.js ------------');
     {
       let start = performance.now();
       let sum = waspace._sum();
