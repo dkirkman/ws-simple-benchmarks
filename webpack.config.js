@@ -5,8 +5,8 @@ module.exports = {
 //  devtool: 'sourcemap',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js',
-    library: 'CJSCommunication',
+    filename: 'worker.bundle.js',
+//    library: 'CJSCommunication',
     chunkFilename: '[name]-[id]-[contenthash].js',
   },
   module: {    

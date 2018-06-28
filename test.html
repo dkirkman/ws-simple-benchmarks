@@ -1,0 +1,9 @@
+<script>
+  console.log('hello');
+  let worker = new Worker('dist/worker.bundle.js');
+  worker.postMessage('js');
+
+  worker.addEventListener('message', event => {
+     console.log('event from worker: ' + JSON.stringify(event.data));
+  });
+</script>
