@@ -1,13 +1,13 @@
 
 .PHONY: make configure copyjs
 
-all: make build/libTest.js build/libTestAsm.js copyjs
+all: make build/libdkbench.js build/libdkbench.js copyjs
 
-build/libTest.js: build/src/libTest.a
-	emcc -s WASM=1 -s MODULARIZE=1 build/src/libTest.a -o build/libTest.js
+build/libdkbench.js: build/src/libdkbench.a
+	emcc -s WASM=1 -s MODULARIZE=1 build/src/libdkbench.a -o build/libdkbench.js
 
-build/libTestAsm.js: build/src/libTest.a
-	emcc -s WASM=0 -s MODULARIZE=1 build/src/libTest.a -o build/libTestAsm.js
+build/libdkbench.js: build/src/libdkbench.a
+	emcc -s WASM=0 -s MODULARIZE=1 build/src/libdkbench.a -o build/libdkbench.js
 
 copyjs:
 	rsync -r --include '*.js'  --include '*/' --exclude '*' src/ build
@@ -19,8 +19,8 @@ make: build
 
 build:
 	mkdir build
-	cd build; emconfigure cmake ../
+	cd build; emconfigure cmake -DCMAKE_BUILD_TYPE=Release ../
 
 configure: build
-	cd build; emconfigure cmake ../
+	cd build; emconfigure cmake -DCMAKE_BUILD_TYPE=Release ../
 

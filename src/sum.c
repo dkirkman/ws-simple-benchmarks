@@ -1,4 +1,6 @@
+#include "bench.h"
 
+EXPORT
 double sum() {
   int ndat = 1000*1000*1000;
   double sum = 0.0;
