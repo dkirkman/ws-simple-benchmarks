@@ -7,3 +7,4 @@
 
 double sum();
 double smooth();
+double square(int ndat, int npass);

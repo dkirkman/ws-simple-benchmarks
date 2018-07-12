@@ -7,7 +7,7 @@
 
 double smooth();
 
-uint32_t minstd(uint32_t seed) {
+static uint32_t minstd(uint32_t seed) {
   return ((uint64_t)seed * 48271) % 214783647;
 }
 

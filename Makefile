@@ -4,10 +4,10 @@
 all: make build/libdkbench.js build/libdkbenchAsm.js copyjs
 
 build/libdkbench.js: build/src/libdkbench.a
-	emcc -s WASM=1 -s MODULARIZE=1 build/src/libdkbench.a -o build/libdkbench.js
+	emcc -s WASM=1 -s MODULARIZE=1 -s ALLOW_MEMORY_GROWTH=1 build/src/libdkbench.a -o build/libdkbench.js
 
 build/libdkbenchAsm.js: build/src/libdkbench.a
-	emcc -s WASM=0 -s MODULARIZE=1 build/src/libdkbench.a -o build/libdkbenchAsm.js
+	emcc -s WASM=0 -s MODULARIZE=1 -s ALLOW_MEMORY_GROWTH=1 build/src/libdkbench.a -o build/libdkbenchAsm.js
 
 copyjs:
 	rsync -r --include '*.js'  --include '*/' --exclude '*' src/ build

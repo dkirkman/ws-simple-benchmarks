@@ -1,6 +1,8 @@
 import loadEmscripten from './build/LoadEmscripten.mjs';
 import sum from './build/sum.mjs';
 import smooth from './build/smooth.mjs';
+import square from './build/square.mjs';
+
 import {performance} from 'perf_hooks';
 
 
@@ -17,6 +19,20 @@ console.log('--------- pure js ------------');
   let val = smooth();
   let end = performance.now();
   console.log('smooth = ' + val + '  ' + (end-start) + ' ms');
+}
+
+{
+  let start = performance.now();
+  let val = square(1500, 100000);
+  let end = performance.now();
+  console.log('square (cache) = ' + val + '  ' + (end-start) + ' ms');
+}
+
+{
+  let start = performance.now();
+  let val = square(1500000, 100);
+  let end = performance.now();
+  console.log('square = ' + val + '  ' + (end-start) + ' ms');
 }
 
 
@@ -36,6 +52,27 @@ loadEmscripten({'asm.js': true}, cspace => {
     console.log('smooth = ' + smooth + '  ' + (end-start) + ' ms');
   }
 
+  {
+    let start = performance.now();
+    let val = cspace._square(1500, 100000);
+    let end = performance.now();
+    console.log('square (cache) = ' + val + '  ' + (end-start) + ' ms');
+  }
+  
+  {
+    let start = performance.now();
+    let val = cspace._square(1500000, 100);
+    let end = performance.now();
+    console.log('square = ' + val + '  ' + (end-start) + ' ms');
+  }
+
+  {
+    let start = performance.now();
+    let val = cspace._square(1500000, 100);
+    let end = performance.now();
+    console.log('square (after enlarged) = ' + val + '  ' + (end-start) + ' ms');
+  }
+
   console.log('--------- webassembly ------------');
   loadEmscripten({'asm.js': false}, waspace => {
     {
@@ -50,6 +87,34 @@ loadEmscripten({'asm.js': true}, cspace => {
       let smooth = waspace._smooth();
       let end = performance.now();
       console.log('smooth = ' + smooth + '  ' + (end-start) + ' ms');
+    }
+
+    {
+      let start = performance.now();
+      let val = waspace._square(1500, 100000);
+      let end = performance.now();
+      console.log('square (cache) = ' + val + '  ' + (end-start) + ' ms');
+    }
+
+    {
+      let start = performance.now();
+      let val = waspace._square(1500000, 100);
+      let end = performance.now();
+      console.log('square = ' + val + '  ' + (end-start) + ' ms');
+    }
+    
+    {
+      let start = performance.now();
+      let val = waspace._square(1500000, 100);
+      let end = performance.now();
+      console.log('square (after enlarged) = ' + val + '  ' + (end-start) + ' ms');
+    }
+
+    {
+      let start = performance.now();
+      let val = waspace._square(1500000, 100);
+      let end = performance.now();
+      console.log('square (after enlarged again) = ' + val + '  ' + (end-start) + ' ms');
     }
   });
 });
