@@ -3,8 +3,8 @@ function minstd(seed) {
 }
 
 export default function() {
-  let ndat = 50000;
-  
+  let ndat = 15000;
+
   let buf = [];
   let sbuf = [];
   let i = 0;

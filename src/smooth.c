@@ -13,7 +13,7 @@ uint32_t minstd(uint32_t seed) {
 
 EXPORT
 double smooth() {
-  int ndat = 50000;
+  int ndat = 15000;
   
   double *buf = (double *) malloc(ndat*sizeof(double));
   double *sbuf = (double *) malloc(ndat*sizeof(double));
