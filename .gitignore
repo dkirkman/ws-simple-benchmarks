@@ -2,6 +2,7 @@
 build
 nbuild
 dist
+*.class
 
 # Logs
 logs
